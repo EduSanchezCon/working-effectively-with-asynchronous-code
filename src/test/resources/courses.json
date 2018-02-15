@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "name": "Working effectively with asynchronous code",
+    "practices": [1, 2, 3]
+  },
+  {
+    "id": 2,
+    "name": "Refactoring doesn't hurt",
+    "practices": [4, 5]
+  },
+  {
+    "id": 3,
+    "name": "Learn to decide... or not"
+  },
+  {
+    "id": 4,
+    "name": "Advanced lego",
+    "practices": [6, 7, 8]
+  }
+]

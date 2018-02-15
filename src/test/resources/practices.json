@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Practice 1",
+    "description": "Working with callbacks"
+  },
+  {
+    "id": 2,
+    "name": "Practice 2",
+    "description": "Working Promises"
+  },
+  {
+    "id": 3,
+    "name": "Practice 3",
+    "description": "Working with CompletableFuture"
+  },
+  {
+    "id": 4,
+    "name": "Refactoring in the Chuck Norris way",
+    "description": "We'll refactor with no IDE help"
+  },
+  {
+    "id": 5,
+    "name": "Refactoring in the painless way",
+    "description": "In this practice we'll learn how to use the IDE help"
+  },
+  {
+    "id": 6,
+    "name": "First contact with LEGO",
+    "description": "LEGO bricks don't bite... if you are careful"
+  },
+  {
+    "id": 7,
+    "name": "Building your first house",
+    "description": "We'll learn how to combine bricks to build a house"
+  },
+  {
+    "id": 8,
+    "name": "Building your first working nuclear power station",
+    "description": "All you'll need is luck"
+  }
+]
