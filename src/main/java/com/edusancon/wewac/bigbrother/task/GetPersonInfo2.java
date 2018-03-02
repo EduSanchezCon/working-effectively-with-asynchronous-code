@@ -1,10 +1,7 @@
 package com.edusancon.wewac.bigbrother.task;
 
 import com.edusancon.wewac.bigbrother.model.*;
-import com.edusancon.wewac.bigbrother.supplier.FutureSupplier;
-import com.edusancon.wewac.bigbrother.supplier.GetPersonDetails;
-import com.edusancon.wewac.bigbrother.supplier.RandomListSupplier;
-import com.edusancon.wewac.bigbrother.supplier.RandomObjectSupplier;
+import com.edusancon.wewac.bigbrother.repository.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,12 +15,14 @@ public class GetPersonInfo2 implements Function<Person, CompletableFuture<Person
     @Override
     public CompletableFuture<Person> apply(final Person originalPerson) {
 
+        final long personId = originalPerson.getId();
+
         final List<CompletableFuture<?>> futureList = Arrays.asList(
-                new GetPersonDetails().apply(originalPerson.getId()),
-                new FutureSupplier<>(new RandomListSupplier<>(Insurance.class)).get(),
-                new FutureSupplier<>(new RandomObjectSupplier<>(MedicalInfo.class)).get(),
-                new FutureSupplier<>(new RandomListSupplier<>(BankAccount.class)).get(),
-                new FutureSupplier<>(new RandomObjectSupplier<>(AcademicInfo.class)).get());
+                new PersonDetailRepository().getPersonDetail(personId),
+                new InsuranceRepository().getInsurances(personId),
+                new MedicalInfoRepository().getMedicalInfo(personId),
+                new BankAccountRepository().getBankAccounts(personId),
+                new AcademicInfoRepository().getAcademicInfo(personId));
 
         final CompletableFuture<?>[] futureArray = futureList.toArray(new CompletableFuture[futureList.size()]);
 

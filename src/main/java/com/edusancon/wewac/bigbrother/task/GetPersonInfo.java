@@ -1,8 +1,8 @@
 package com.edusancon.wewac.bigbrother.task;
 
 import com.edusancon.wewac.bigbrother.model.*;
+import com.edusancon.wewac.bigbrother.repository.*;
 import com.edusancon.wewac.bigbrother.supplier.FutureSupplier;
-import com.edusancon.wewac.bigbrother.supplier.GetPersonDetails;
 import com.edusancon.wewac.bigbrother.supplier.RandomListSupplier;
 import com.edusancon.wewac.bigbrother.supplier.RandomObjectSupplier;
 
@@ -16,16 +16,13 @@ public class GetPersonInfo implements Function<Person, CompletableFuture<Person>
     @Override
     public CompletableFuture<Person> apply(final Person originalPerson) {
 
-        CompletableFuture<Person> personFuture =
-                new GetPersonDetails().apply(originalPerson.getId());
-        CompletableFuture<List<Insurance>> insurancesFuture =
-                new FutureSupplier<>(new RandomListSupplier<>(Insurance.class)).get();
-        CompletableFuture<MedicalInfo> medicalInfoFuture =
-                new FutureSupplier<>(new RandomObjectSupplier<>(MedicalInfo.class)).get();
-        CompletableFuture<List<BankAccount>> bankAccountsFuture =
-                new FutureSupplier<>(new RandomListSupplier<>(BankAccount.class)).get();
-        CompletableFuture<AcademicInfo> academicInfoFuture =
-                new FutureSupplier<>(new RandomObjectSupplier<>(AcademicInfo.class)).get();
+        final long personId = originalPerson.getId();
+
+        CompletableFuture<Person> personFuture = new PersonDetailRepository().getPersonDetail(personId);
+        CompletableFuture<List<Insurance>> insurancesFuture = new InsuranceRepository().getInsurances(personId);
+        CompletableFuture<MedicalInfo> medicalInfoFuture = new MedicalInfoRepository().getMedicalInfo(personId);
+        CompletableFuture<List<BankAccount>> bankAccountsFuture = new BankAccountRepository().getBankAccounts(personId);
+        CompletableFuture<AcademicInfo> academicInfoFuture = new AcademicInfoRepository().getAcademicInfo(personId);
 
         final CompletableFuture<Void> allOf = CompletableFuture.allOf(
                 personFuture, insurancesFuture, medicalInfoFuture, bankAccountsFuture, academicInfoFuture);
