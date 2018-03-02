@@ -1,4 +1,4 @@
-package com.edusancon.wewac.bigbrother.supplier;
+package com.edusancon.wewac.util;
 
 import io.github.benas.randombeans.EnhancedRandomBuilder;
 import io.github.benas.randombeans.api.EnhancedRandom;

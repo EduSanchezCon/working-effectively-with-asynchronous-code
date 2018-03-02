@@ -2,6 +2,7 @@ package com.edusancon.wewac.bigbrother.filler;
 
 import com.edusancon.wewac.bigbrother.model.AcademicInfo;
 import com.edusancon.wewac.bigbrother.model.Person;
+import com.edusancon.wewac.bigbrother.supplier.FutureSupplier;
 import com.edusancon.wewac.bigbrother.supplier.RandomObjectSupplier;
 
 import java.util.concurrent.CompletableFuture;
@@ -11,7 +12,9 @@ public class AcademicInfoFiller extends AbstractFiller<Person, AcademicInfo>{
 
     @Override
     protected CompletableFuture<AcademicInfo> obtainInfo(Person person) {
-        return new RandomObjectSupplier<AcademicInfo>(AcademicInfo.class).get();
+        return new FutureSupplier<>(
+                    new RandomObjectSupplier<>(AcademicInfo.class))
+                .get();
     }
 
     @Override

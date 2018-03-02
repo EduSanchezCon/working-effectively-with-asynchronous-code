@@ -4,15 +4,18 @@ import com.edusancon.wewac.students.model.Practice;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasSize;
 
 class RandomListSupplierTest {
 
     @Test
     public void testRandomListGeneration(){
 
-        final CompletableFuture<List<Practice>> future = new RandomListSupplier<Practice>(Practice.class, 1000L).get();
+        final List<Practice> list = new RandomListSupplier<>(Practice.class).get();
 
-        System.out.println(future.join());
+        assertThat(list, hasSize(greaterThan(0)));
     }
 }

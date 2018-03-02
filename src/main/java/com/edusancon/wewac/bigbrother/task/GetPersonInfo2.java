@@ -1,6 +1,7 @@
 package com.edusancon.wewac.bigbrother.task;
 
 import com.edusancon.wewac.bigbrother.model.*;
+import com.edusancon.wewac.bigbrother.supplier.FutureSupplier;
 import com.edusancon.wewac.bigbrother.supplier.GetPersonDetails;
 import com.edusancon.wewac.bigbrother.supplier.RandomListSupplier;
 import com.edusancon.wewac.bigbrother.supplier.RandomObjectSupplier;
@@ -19,10 +20,10 @@ public class GetPersonInfo2 implements Function<Person, CompletableFuture<Person
 
         final List<CompletableFuture<?>> futureList = Arrays.asList(
                 new GetPersonDetails().apply(originalPerson.getId()),
-                new RandomListSupplier<Insurance>(Insurance.class).get(),
-                new RandomObjectSupplier<MedicalInfo>(MedicalInfo.class).get(),
-                new RandomListSupplier<BankAccount>(BankAccount.class).get(),
-                new RandomObjectSupplier<AcademicInfo>(AcademicInfo.class).get());
+                new FutureSupplier<>(new RandomListSupplier<>(Insurance.class)).get(),
+                new FutureSupplier<>(new RandomObjectSupplier<>(MedicalInfo.class)).get(),
+                new FutureSupplier<>(new RandomListSupplier<>(BankAccount.class)).get(),
+                new FutureSupplier<>(new RandomObjectSupplier<>(AcademicInfo.class)).get());
 
         final CompletableFuture<?>[] futureArray = futureList.toArray(new CompletableFuture[futureList.size()]);
 

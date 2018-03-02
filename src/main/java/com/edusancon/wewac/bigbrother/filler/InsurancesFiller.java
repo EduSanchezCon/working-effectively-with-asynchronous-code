@@ -2,6 +2,7 @@ package com.edusancon.wewac.bigbrother.filler;
 
 import com.edusancon.wewac.bigbrother.model.Insurance;
 import com.edusancon.wewac.bigbrother.model.Person;
+import com.edusancon.wewac.bigbrother.supplier.FutureSupplier;
 import com.edusancon.wewac.bigbrother.supplier.RandomListSupplier;
 
 import java.util.List;
@@ -12,7 +13,9 @@ public class InsurancesFiller extends AbstractFiller<Person, List<Insurance>>{
 
     @Override
     protected CompletableFuture<List<Insurance>> obtainInfo(Person person) {
-        return new RandomListSupplier<Insurance>(Insurance.class).get();
+        return new FutureSupplier<>(
+                    new RandomListSupplier<Insurance>(Insurance.class))
+                .get();
     }
 
     @Override
