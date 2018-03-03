@@ -47,7 +47,42 @@ public class GetPersonInfo2 implements Function<Person, CompletableFuture<Person
                     return  originalPerson;
                 }
             );
+    }
 
 
+
+    private CompletableFuture<Person> apply(Person originalPerson, CompletableFuture<List<?>> futureAll) {
+
+        return futureAll.thenApply(
+                list -> {
+                    for (Object object : list) {
+
+                        if (object instanceof Person) {
+                            Person personDetails = (Person) object;
+                            originalPerson.setName(personDetails.getName());
+                            originalPerson.setPassport(personDetails.getPassport());
+                            originalPerson.setBirthday(personDetails.getBirthday());
+
+                        } else if (object instanceof AcademicInfo){
+                            originalPerson.setAcademicInfo((AcademicInfo) object);
+
+                        } else if (object instanceof MedicalInfo){
+                            originalPerson.setMedicalInfo((MedicalInfo) object);
+
+/*    _________  */     } else if (object instanceof List){
+/*   |       |   */         List<?> objects = (List)object;
+/*   |       |   */         if (!objects.isEmpty()){
+/*   |       |   */             if (objects.get(0) instanceof BankAccount){
+/*   |      (_)  */                 originalPerson.setBankAccounts((List<BankAccount>) object);
+/*   |      /|\  */
+/*   |       |   */             } else if (objects.get(0) instanceof Insurance){
+/*   |      / \  */                 originalPerson.setInsurances((List<Insurance>) object);
+/*   |           */              }
+                            }
+                        }
+                    }
+                    return originalPerson;
+                }
+        );
     }
 }

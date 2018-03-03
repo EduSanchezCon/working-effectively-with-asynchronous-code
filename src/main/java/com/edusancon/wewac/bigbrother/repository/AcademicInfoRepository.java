@@ -8,7 +8,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class AcademicInfoRepository {
 
-    public CompletableFuture<AcademicInfo> getAcademicInfo(long personID){
+    public CompletableFuture<AcademicInfo> getAcademicInfo(Long personID){
 
         return new FutureSupplier<>(
                     new RandomObjectSupplier<>(AcademicInfo.class))

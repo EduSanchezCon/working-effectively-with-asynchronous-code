@@ -6,13 +6,13 @@ import java.util.function.UnaryOperator;
 public abstract class AbstractFiller<T, U> {
 
 
-    public CompletableFuture<UnaryOperator<T>> get(final T original){
+    public <P> CompletableFuture<UnaryOperator<T>> get(final P original){
 
         return obtainInfo(original)
                 .thenApply(info -> getFillerFunction(info));
     }
 
-    abstract protected CompletableFuture<U> obtainInfo(T original);
+    abstract protected <P> CompletableFuture<U> obtainInfo(P original);
 
     abstract protected UnaryOperator<T> getFillerFunction(U info);
 }

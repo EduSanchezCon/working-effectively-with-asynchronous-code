@@ -2,19 +2,23 @@ package com.edusancon.wewac.bigbrother.filler;
 
 import com.edusancon.wewac.bigbrother.model.AcademicInfo;
 import com.edusancon.wewac.bigbrother.model.Person;
-import com.edusancon.wewac.bigbrother.supplier.FutureSupplier;
-import com.edusancon.wewac.bigbrother.supplier.RandomObjectSupplier;
+import com.edusancon.wewac.bigbrother.repository.AcademicInfoRepository;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.UnaryOperator;
 
 public class AcademicInfoFiller extends AbstractFiller<Person, AcademicInfo>{
 
+    private final AcademicInfoRepository repository;
+
+    public AcademicInfoFiller(AcademicInfoRepository repository) {
+        this.repository = repository;
+    }
+
+
     @Override
-    protected CompletableFuture<AcademicInfo> obtainInfo(Person person) {
-        return new FutureSupplier<>(
-                    new RandomObjectSupplier<>(AcademicInfo.class))
-                .get();
+    protected <P> CompletableFuture<AcademicInfo> obtainInfo(P personId) {
+        return repository.getAcademicInfo((long)personId);
     }
 
     @Override

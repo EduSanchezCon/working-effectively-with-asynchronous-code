@@ -2,6 +2,7 @@ package com.edusancon.wewac.bigbrother.task;
 
 import com.edusancon.wewac.bigbrother.filler.*;
 import com.edusancon.wewac.bigbrother.model.Person;
+import com.edusancon.wewac.bigbrother.repository.*;
 import com.edusancon.wewac.util.FunctionCollector;
 
 import java.util.Arrays;
@@ -17,12 +18,14 @@ public class GetPersonInfo3 implements Function<Person, CompletableFuture<Person
     @Override
     public CompletableFuture<Person> apply(final Person originalPerson) {
 
+        final long personId = originalPerson.getId();
+
         final List<CompletableFuture<UnaryOperator<Person>>> futureList = Arrays.asList(
-                new PersonDetailsFiller().get(originalPerson),
-                new InsurancesFiller().get(originalPerson),
-                new MedicalInfoFiller().get(originalPerson),
-                new BankAccountsFiller().get(originalPerson),
-                new AcademicInfoFiller().get(originalPerson));
+                new PersonDetailsFiller(new PersonDetailRepository()).get(originalPerson),
+                new InsurancesFiller(new InsuranceRepository()).get(originalPerson),
+                new MedicalInfoFiller(new MedicalInfoRepository()).get(originalPerson),
+                new BankAccountsFiller(new BankAccountRepository()).get(originalPerson),
+                new AcademicInfoFiller(new AcademicInfoRepository()).get(personId));
 
         final CompletableFuture<UnaryOperator<Person>>[] futureArray =
                 futureList.toArray(new CompletableFuture[futureList.size()]);

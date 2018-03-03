@@ -8,10 +8,15 @@ import java.util.function.UnaryOperator;
 
 public class PersonDetailsFiller_incomplete {
 
+    private final PersonDetailRepository repository;
+
+    public PersonDetailsFiller_incomplete(PersonDetailRepository repository) {
+        this.repository = repository;
+    }
 
     public CompletableFuture<UnaryOperator<Person>> get(final Person person){
 
-        return new PersonDetailRepository().getPersonDetail(person.getId())
+        return repository.getPersonDetail(person.getId())
                 .thenApply(det ->
                         (UnaryOperator<Person>) p -> {
                             p.setName(det.getName());
