@@ -38,6 +38,7 @@ public class GetPersonInfo2 implements Function<Person, CompletableFuture<Person
                     originalPerson.setName(personDetails.getName());
                     originalPerson.setPassport(personDetails.getPassport());
                     originalPerson.setBirthday(personDetails.getBirthday());
+                    originalPerson.setMarriedTo(personDetails.getMarriedTo());
 
                     originalPerson.setInsurances((List<Insurance>) list.get(1));
                     originalPerson.setBankAccounts((List<BankAccount>) list.get(3));
@@ -62,6 +63,7 @@ public class GetPersonInfo2 implements Function<Person, CompletableFuture<Person
                             originalPerson.setName(personDetails.getName());
                             originalPerson.setPassport(personDetails.getPassport());
                             originalPerson.setBirthday(personDetails.getBirthday());
+                            originalPerson.setMarriedTo(personDetails.getMarriedTo());
 
                         } else if (object instanceof AcademicInfo){
                             originalPerson.setAcademicInfo((AcademicInfo) object);

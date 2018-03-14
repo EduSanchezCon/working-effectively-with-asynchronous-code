@@ -1,7 +1,6 @@
 package com.edusancon.wewac.bigbrother.task;
 
 import com.edusancon.wewac.bigbrother.model.Person;
-import com.edusancon.wewac.bigbrother.task.GetPersonInfo3;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.CompletableFuture;
@@ -14,7 +13,7 @@ class GetPersonInfoTest {
 
         final Person originalPerson = new Person(10L);
 
-        CompletableFuture<Person> personFuture = new GetPersonInfo2().apply(originalPerson);
+        CompletableFuture<Person> personFuture = new GetPersonInfo().apply(originalPerson);
 
         Person person = personFuture.get();
 

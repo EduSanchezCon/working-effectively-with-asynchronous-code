@@ -20,6 +20,9 @@ public class Person extends JsonWritable {
     private List<BankAccount> bankAccounts;
     private AcademicInfo academicInfo;
 
+    private Long marriedTo;
+    private Person partner;
+
     @JsonCreator
     public Person(
             @JsonProperty("id") long id) {
@@ -86,5 +89,19 @@ public class Person extends JsonWritable {
         this.academicInfo = academicInfo;
     }
 
+    public Long getMarriedTo() {
+        return marriedTo;
+    }
 
+    public void setMarriedTo(Long marriedTo) {
+        this.marriedTo = marriedTo;
+    }
+
+    public Person getPartner() {
+        return partner;
+    }
+
+    public void setPartner(Person partner) {
+        this.partner = partner;
+    }
 }

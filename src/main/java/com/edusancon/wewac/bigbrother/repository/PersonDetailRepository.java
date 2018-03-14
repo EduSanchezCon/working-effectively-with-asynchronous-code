@@ -16,6 +16,7 @@ public class PersonDetailRepository {
                     person.setName("Persona Muy Fake");
                     person.setPassport("A12345678");
                     person.setBirthday(LocalDate.now());
+                    person.setMarriedTo(123L);
 
                     return  person;
                 }).get();

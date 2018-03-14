@@ -8,15 +8,17 @@ import java.util.function.UnaryOperator;
 
 public class PersonDetailsFiller extends AbstractFiller<Person, Person>{
 
+    private final long personId;
     private final PersonDetailRepository repository;
 
-    public PersonDetailsFiller(PersonDetailRepository repository) {
+    public PersonDetailsFiller(long personId, PersonDetailRepository repository) {
+        this.personId = personId;
         this.repository = repository;
     }
 
     @Override
-    protected <P> CompletableFuture<Person> obtainInfo(P personId) {
-        return repository.getPersonDetail((long) personId);
+    protected CompletableFuture<Person> obtainInfo() {
+        return repository.getPersonDetail(personId);
     }
 
     @Override
@@ -25,6 +27,7 @@ public class PersonDetailsFiller extends AbstractFiller<Person, Person>{
             p.setName(detail.getName());
             p.setPassport(detail.getPassport());
             p.setBirthday(detail.getBirthday());
+            p.setMarriedTo(detail.getMarriedTo());
 
             return p;
         };

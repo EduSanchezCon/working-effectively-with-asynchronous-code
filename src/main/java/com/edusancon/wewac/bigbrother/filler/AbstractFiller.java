@@ -3,16 +3,29 @@ package com.edusancon.wewac.bigbrother.filler;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.UnaryOperator;
 
-public abstract class AbstractFiller<T, U> {
+public abstract class AbstractFiller<T, U> implements Filler<T, U> {
 
+    private final CompletableFuture<U> infoPromise;
 
-    public <P> CompletableFuture<UnaryOperator<T>> get(final P original){
+    public AbstractFiller(){
+        infoPromise = new CompletableFuture<U>();
+    }
 
-        return obtainInfo(original)
+    @Override
+    public CompletableFuture<UnaryOperator<T>> get(){
+
+        return obtainInfo()
+                .whenComplete((u,e)-> {
+                    if (e != null) infoPromise.completeExceptionally(e);
+                    else infoPromise.complete(u);})
                 .thenApply(info -> getFillerFunction(info));
     }
 
-    abstract protected <P> CompletableFuture<U> obtainInfo(P original);
+    public CompletableFuture<U> getInfoPromise() {
+        return infoPromise;
+    }
+
+    abstract protected CompletableFuture<U> obtainInfo();
 
     abstract protected UnaryOperator<T> getFillerFunction(U info);
 }

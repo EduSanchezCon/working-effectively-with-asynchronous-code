@@ -2,9 +2,6 @@ package com.edusancon.wewac.bigbrother.task;
 
 import com.edusancon.wewac.bigbrother.model.*;
 import com.edusancon.wewac.bigbrother.repository.*;
-import com.edusancon.wewac.bigbrother.supplier.FutureSupplier;
-import com.edusancon.wewac.bigbrother.supplier.RandomListSupplier;
-import com.edusancon.wewac.bigbrother.supplier.RandomObjectSupplier;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -33,6 +30,7 @@ public class GetPersonInfo implements Function<Person, CompletableFuture<Person>
                 originalPerson.setName(personDetails.getName());
                 originalPerson.setPassport(personDetails.getPassport());
                 originalPerson.setBirthday(personDetails.getBirthday());
+                originalPerson.setMarriedTo(personDetails.getMarriedTo());
 
                 originalPerson.setInsurances(insurancesFuture.join());
                 originalPerson.setBankAccounts(bankAccountsFuture.join());

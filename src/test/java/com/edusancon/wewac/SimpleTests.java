@@ -11,6 +11,7 @@ import com.edusancon.wewac.students.task.decorator.MeasurableTask;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 public class SimpleTests {
 
@@ -46,4 +47,16 @@ public class SimpleTests {
         System.out.println(student);
     }
 
+    @Test
+    public void givenAExceptionThrownShouldNotInvokeThenRun(){
+
+        final CompletableFuture<Object> future = new CompletableFuture<>();
+        future.completeExceptionally(new NullPointerException());
+
+        future.thenRun(()-> System.out.println("Esto nunca se va a ejecutar"));
+
+        future.whenComplete((v, e) -> {
+            if (e != null) System.out.println("Ha ocurrido una excepción");
+        } );
+    }
 }

@@ -12,7 +12,7 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
-public class GetPersonInfo3 implements Function<Person, CompletableFuture<Person>>{
+public class GetPersonInfo4 implements Function<Person, CompletableFuture<Person>>{
 
 
     @Override
@@ -20,12 +20,15 @@ public class GetPersonInfo3 implements Function<Person, CompletableFuture<Person
 
         final long personId = originalPerson.getId();
 
+        final PersonDetailsFiller personDetailsFiller = new PersonDetailsFiller(personId, new PersonDetailRepository());
+
         final List<CompletableFuture<UnaryOperator<Person>>> futureList = Arrays.asList(
-                new PersonDetailsFiller(personId, new PersonDetailRepository()).get(),
+                personDetailsFiller.get(),
                 new InsurancesFiller(personId, new InsuranceRepository()).get(),
                 new MedicalInfoFiller(personId, new MedicalInfoRepository()).get(),
                 new BankAccountsFiller(personId, new BankAccountRepository()).get(),
-                new AcademicInfoFiller(personId, new AcademicInfoRepository()).get());
+                new AcademicInfoFiller(personId, new AcademicInfoRepository()).get(),
+                new PartnerDetailsFiller(personDetailsFiller, new PersonDetailRepository()).get());
 
         final CompletableFuture<UnaryOperator<Person>>[] futureArray =
                 futureList.toArray(new CompletableFuture[futureList.size()]);

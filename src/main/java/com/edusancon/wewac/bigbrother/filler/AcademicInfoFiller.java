@@ -9,16 +9,18 @@ import java.util.function.UnaryOperator;
 
 public class AcademicInfoFiller extends AbstractFiller<Person, AcademicInfo>{
 
+    private final long personId;
     private final AcademicInfoRepository repository;
 
-    public AcademicInfoFiller(AcademicInfoRepository repository) {
+    public AcademicInfoFiller(long personId, AcademicInfoRepository repository) {
+        this.personId = personId;
         this.repository = repository;
     }
 
 
     @Override
-    protected <P> CompletableFuture<AcademicInfo> obtainInfo(P personId) {
-        return repository.getAcademicInfo((long)personId);
+    protected CompletableFuture<AcademicInfo> obtainInfo() {
+        return repository.getAcademicInfo(personId);
     }
 
     @Override

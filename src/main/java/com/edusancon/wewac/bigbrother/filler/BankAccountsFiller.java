@@ -10,15 +10,17 @@ import java.util.function.UnaryOperator;
 
 public class BankAccountsFiller extends AbstractFiller<Person, List<BankAccount>>{
 
+    private final long personId;
     private final BankAccountRepository repository;
 
-    public BankAccountsFiller(BankAccountRepository repository) {
+    public BankAccountsFiller(long personId, BankAccountRepository repository) {
+        this.personId = personId;
         this.repository = repository;
     }
 
     @Override
-    protected <P> CompletableFuture<List<BankAccount>> obtainInfo(P personId) {
-        return repository.getBankAccounts((long) personId);
+    protected CompletableFuture<List<BankAccount>> obtainInfo() {
+        return repository.getBankAccounts(personId);
     }
 
     @Override
