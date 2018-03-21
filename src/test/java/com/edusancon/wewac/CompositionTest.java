@@ -15,12 +15,12 @@ public class CompositionTest {
             System.out.println( "primer futuro" );
         });
 
-        future1.thenRun( () -> {
+        future1.thenRunAsync( () -> {
             ThreadHelper.sleep(1000);
             System.out.println( "segundo futuro" );
         });
 
-        future1.thenRun( () -> {
+        future1.thenRunAsync( () -> {
             ThreadHelper.sleep(1000);
             System.out.println( "tercer futuro" );
         });

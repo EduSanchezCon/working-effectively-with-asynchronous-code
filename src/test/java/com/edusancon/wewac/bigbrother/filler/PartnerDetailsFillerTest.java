@@ -39,7 +39,9 @@ class PartnerDetailsFillerTest {
         Person originalPerson = new RandomObjectSupplier<>(Person.class).get();
         Person expectedPartner = new RandomObjectSupplier<>(Person.class).get();
 
-        final UnaryOperator<Person> fillerFunction = sut.getFillerFunction(expectedPartner, originalPerson);
+        final UnaryOperator<Person> fillerFunction =
+                sut.getFillerFunction(expectedPartner, originalPerson);
+
         fillerFunction.apply( originalPerson );
 
         assertThat(originalPerson.getPartner(), is(expectedPartner));

@@ -15,11 +15,16 @@ public class GetPersonInfo implements Function<Person, CompletableFuture<Person>
 
         final long personId = originalPerson.getId();
 
-        CompletableFuture<Person> personFuture = new PersonDetailRepository().getPersonDetail(personId);
-        CompletableFuture<List<Insurance>> insurancesFuture = new InsuranceRepository().getInsurances(personId);
-        CompletableFuture<MedicalInfo> medicalInfoFuture = new MedicalInfoRepository().getMedicalInfo(personId);
-        CompletableFuture<List<BankAccount>> bankAccountsFuture = new BankAccountRepository().getBankAccounts(personId);
-        CompletableFuture<AcademicInfo> academicInfoFuture = new AcademicInfoRepository().getAcademicInfo(personId);
+        CompletableFuture<Person> personFuture =
+                new PersonDetailRepository().getPersonDetail(personId);
+        CompletableFuture<List<Insurance>> insurancesFuture =
+                new InsuranceRepository().getInsurances(personId);
+        CompletableFuture<MedicalInfo> medicalInfoFuture =
+                new MedicalInfoRepository().getMedicalInfo(personId);
+        CompletableFuture<List<BankAccount>> bankAccountsFuture =
+                new BankAccountRepository().getBankAccounts(personId);
+        CompletableFuture<AcademicInfo> academicInfoFuture =
+                new AcademicInfoRepository().getAcademicInfo(personId);
 
         final CompletableFuture<Void> allOf = CompletableFuture.allOf(
                 personFuture, insurancesFuture, medicalInfoFuture, bankAccountsFuture, academicInfoFuture);

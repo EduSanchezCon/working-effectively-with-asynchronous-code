@@ -18,6 +18,7 @@ public class PersonDetailsFiller extends AbstractFiller<Person, Person>{
 
     @Override
     protected CompletableFuture<Person> obtainInfo() {
+
         return repository.getPersonDetail(personId);
     }
 

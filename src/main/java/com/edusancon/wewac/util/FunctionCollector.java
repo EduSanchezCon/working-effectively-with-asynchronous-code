@@ -20,6 +20,7 @@ public class FunctionCollector<T> implements Collector<UnaryOperator<T>, T, T> {
 
     @Override
     public BiConsumer<T, UnaryOperator<T>> accumulator() {
+
         return (acc, fun) -> fun.apply(acc);
     }
 

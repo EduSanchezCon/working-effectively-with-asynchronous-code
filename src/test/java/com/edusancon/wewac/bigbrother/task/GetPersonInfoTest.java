@@ -13,7 +13,7 @@ class GetPersonInfoTest {
 
         final Person originalPerson = new Person(10L);
 
-        CompletableFuture<Person> personFuture = new GetPersonInfo().apply(originalPerson);
+        CompletableFuture<Person> personFuture = new GetPersonInfo4().apply(originalPerson);
 
         Person person = personFuture.get();
 

@@ -17,7 +17,7 @@ public class PartnerDetailsFiller extends AbstractNestedFiller<Person, Person, P
 
     @Override
     protected CompletableFuture<Person> obtainInfo(Person previousResponse) {
-        return repository.getPersonDetail(previousResponse.getId());
+        return repository.getPersonDetail(previousResponse.getMarriedTo());
     }
 
     @Override
@@ -30,6 +30,7 @@ public class PartnerDetailsFiller extends AbstractNestedFiller<Person, Person, P
 
     @Override
     protected boolean conditionToExecute(Person previousResult) {
+
         return previousResult.getMarriedTo() != null;
     }
 }

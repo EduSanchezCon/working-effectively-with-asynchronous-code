@@ -24,7 +24,8 @@ public class GetPersonInfo2 implements Function<Person, CompletableFuture<Person
                 new BankAccountRepository().getBankAccounts(personId),
                 new AcademicInfoRepository().getAcademicInfo(personId));
 
-        final CompletableFuture<?>[] futureArray = futureList.toArray(new CompletableFuture[futureList.size()]);
+        final CompletableFuture<?>[] futureArray =
+                futureList.toArray(new CompletableFuture[futureList.size()]);
 
         CompletableFuture<List<?>> futureAll = CompletableFuture.allOf(futureArray)
                 .thenApply(
@@ -72,7 +73,7 @@ public class GetPersonInfo2 implements Function<Person, CompletableFuture<Person
                             originalPerson.setMedicalInfo((MedicalInfo) object);
 
 /*    _________  */     } else if (object instanceof List){
-/*   |       |   */         List<?> objects = (List)object;
+/*   |/      |   */         List<?> objects = (List)object;
 /*   |       |   */         if (!objects.isEmpty()){
 /*   |       |   */             if (objects.get(0) instanceof BankAccount){
 /*   |      (_)  */                 originalPerson.setBankAccounts((List<BankAccount>) object);

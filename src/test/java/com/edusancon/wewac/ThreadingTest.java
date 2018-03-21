@@ -16,10 +16,10 @@ public class ThreadingTest {
     public void defaultExecutorTest() throws ExecutionException, InterruptedException {
 
 
-
-        final List<CompletableFuture<Integer>> futures = IntStream.rangeClosed(1, 8).boxed()
-                .map(this::getLater)
-                .collect(Collectors.toList());
+        final List<CompletableFuture<Integer>> futures =
+                IntStream.rangeClosed(1, 8).boxed()
+                    .map(this::getLater)
+                    .collect(Collectors.toList());
 
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]))
                 .whenComplete((v, ex) -> System.out.println("Se acabó lo que se daba"))

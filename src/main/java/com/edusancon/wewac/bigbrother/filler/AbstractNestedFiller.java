@@ -1,5 +1,7 @@
 package com.edusancon.wewac.bigbrother.filler;
 
+import com.edusancon.wewac.util.ThreadHelper;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.function.UnaryOperator;
 
@@ -27,8 +29,8 @@ public abstract class AbstractNestedFiller<T, U, V> implements Filler<T, U>{
                     } else {
                         return CompletableFuture.completedFuture(x -> x);
                     }
-                }
-
+                },
+                ThreadHelper.APP_EXECUTOR
         ).handle((f, ex2) -> {
             if (ex2 != null) {
                 infoPromise.completeExceptionally(ex2);

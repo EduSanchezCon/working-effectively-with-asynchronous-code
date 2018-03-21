@@ -8,6 +8,7 @@ public abstract class AbstractFiller<T, U> implements Filler<T, U> {
     private final CompletableFuture<U> infoPromise;
 
     public AbstractFiller(){
+
         infoPromise = new CompletableFuture<U>();
     }
 
